@@ -89,6 +89,7 @@ message CStreamingClientCaps {
     repeated EStreamAudioCodec supported_audio_codecs = 14;
     repeated EStreamVideoCodec supported_video_codecs = 15;
     optional bool can_toggle_fullscreen = 16;
+    optional bool supports_video_frame_header = 17;
 }
 
 message CStreamingClientConfig {
@@ -131,6 +132,8 @@ message CStreamingClientConfig {
     optional float pyrowave_quality_modifier = 38;
     optional bool pyrowave_yuv444 = 39;
     optional int32 pyrowave_bitrate_kbps = 40 [default = -1];
+    optional EDisplayStyle display_style = 41 [default = k_EDisplayStyleLetterbox];
+    optional EStreamHDRMode hdr_mode = 42 [default = k_EStreamHDRModeAuto];
 }
 
 message CStreamingServerConfig {
@@ -198,6 +201,7 @@ message CStartVideoDataMsg {
     optional uint32 width = 4;
     optional uint32 height = 5;
     optional EStreamColorspace colorspace = 6;
+    optional bool video_frame_headers = 7;
 }
 
 message CStopVideoDataMsg {
@@ -225,11 +229,6 @@ message CRecordedInput {
 
 message CRecordedInputStream {
     repeated CRecordedInput entries = 1;
-}
-
-message CInputLatencyTestMsg {
-    required uint32 input_mark = 1;
-    optional uint32 color = 2;
 }
 
 message CInputTouchFingerDownMsg {
@@ -584,6 +583,10 @@ message CStreamVideoOverflowMsg {
     optional uint32 last_frame_id = 2;
 }
 
+message CSetSupportedColorspacesMsg {
+    repeated EStreamColorspace supported_colorspaces = 1;
+}
+
 message CStreamDataLostMsg {
     repeated uint32 packets = 1;
 }
@@ -601,12 +604,13 @@ message CVideoFrameHeader {
     optional uint32 pixel_bits = 4;
     optional bool yuv420 = 5;
     optional bool yuv444 = 6;
-    optional uint32 colorspace = 7;
+    optional EStreamColorspace colorspace = 7;
     optional uint32 min_luminance = 8;
     optional uint32 max_luminance = 9;
     optional uint32 sdr_luminance = 10;
     optional uint32 width = 11;
     optional uint32 height = 12;
+    optional bool cursor_captured = 13;
 }
 
 message CFrameEvent {
@@ -764,7 +768,7 @@ enum EStreamControlMessage {
     k_EStreamControlSetCursorImage = 67;
     k_EStreamControlDeleteCursor = 68;
     k_EStreamControlSetTargetFramerate = 69;
-    k_EStreamControlInputLatencyTest = 70;
+    k_EStreamControlInputLatencyTest_OBSOLETE = 70;
     k_EStreamControlGamepadRumble_OBSOLETE = 71;
     k_EStreamControlOverlayEnabled = 74;
     k_EStreamControlInputControllerAttached_OBSOLETE = 75;
@@ -835,6 +839,7 @@ enum EStreamControlMessage {
     k_EStreamControlSetCursorScale = 146;
     k_EStreamControlCaptureFailed = 147;
     k_EStreamControlVideoOverflow = 148;
+    k_EStreamControlSetSupportedColorspaces = 149;
 }
 
 enum EStreamVersion {
@@ -887,6 +892,18 @@ enum EStreamP2PScope {
     k_EStreamP2PScopeOnlyMe = 2;
     k_EStreamP2PScopeFriends = 3;
     k_EStreamP2PScopeEveryone = 4;
+}
+
+enum EDisplayStyle {
+    k_EDisplayStyleLetterbox = 0;
+    k_EDisplayStyleStretch = 1;
+    k_EDisplayStyleZoom = 2;
+}
+
+enum EStreamHDRMode {
+    k_EStreamHDRModeAuto = 0;
+    k_EStreamHDRModeOn = 1;
+    k_EStreamHDRModeOff = 2;
 }
 
 enum EStreamHostPlayAudioPreference {
