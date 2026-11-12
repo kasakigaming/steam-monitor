@@ -4,9 +4,9 @@ vtable_rva = "0x13613F8"
 
 [IClientRemoteStorage.IsCloudEnabledForApp]
 method_index = 9
-funcHash = "0x88A7278E"
+funcHash = "0x50285F81"
 target_rva = "0x778370"
-fencepost = "0x8BE02319"
+fencepost = "0x535296D0"
 argc = 1
 
 [IClientUser]
@@ -15,16 +15,16 @@ vtable_rva = "0x1356C58"
 
 [IClientUser.GetAppOwnershipTicketExtendedData]
 method_index = 105
-funcHash = "0xC7E71245"
+funcHash = "0x5578709F"
 target_rva = "0x781410"
-fencepost = "0xC8449840"
+fencepost = "0x55D3418F"
 argc = 2
 
 [IClientUser.GetEncryptedAppTicket]
 method_index = 121
-funcHash = "0xE0468CB4"
+funcHash = "0x25D6BB1C"
 target_rva = "0x884ED0"
-fencepost = "0xE0B80200"
+fencepost = "0x2646F563"
 argc = 1
 
 [IClientUser.GetSteamID]
@@ -36,9 +36,9 @@ argc = 0
 
 [IClientUser.RequestEncryptedAppTicket]
 method_index = 120
-funcHash = "0x25D6BB1D"
+funcHash = "0xBBB80477"
 target_rva = "0x74E140"
-fencepost = "0x2646B663"
+fencepost = "0xBC2703B9"
 argc = 2
 
 [IClientUser.RequiresLegacyCDKey]
@@ -54,14 +54,14 @@ vtable_rva = "0x135C6E0"
 
 [IClientUtils.GetAPICallResult]
 method_index = 24
-funcHash = "0x2D3D3947"
+funcHash = "0x2D3D3979"
 target_rva = "0x77C160"
-fencepost = "0x2EDF5EE6"
+fencepost = "0x2EDFDD1A"
 argc = 3
 
 [IClientUtils.GetAppID]
 method_index = 19
-funcHash = "0x09607EC4"
+funcHash = "0x09607EC2"
 target_rva = "0x780320"
-fencepost = "0x0AFE7552"
+fencepost = "0x0AFEF352"
 argc = 0
